@@ -188,6 +188,24 @@ body {
   justify-content: space-between;
   gap: 10px;
 }
+.ex-left {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.ex-prefix {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  padding: 3px 7px;
+  border: 1px solid var(--orange);
+  border-radius: 3px;
+  background: rgba(244, 123, 32, 0.05);
+}
 .ex-name {
   font-family: 'Bebas Neue', sans-serif;
   font-size: 22px;
@@ -252,18 +270,24 @@ body {
 }
 .wod-header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 10px;
   padding-bottom: 14px;
   margin-bottom: 14px;
   border-bottom: 1px dashed var(--border);
 }
+.wod-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 10px;
+}
 .wod-format {
   display: flex;
   align-items: center;
   gap: 10px;
+  flex-wrap: wrap;
 }
 .amrap-badge {
   font-family: 'Bebas Neue', sans-serif;
@@ -273,12 +297,22 @@ body {
   color: #fff;
   padding: 4px 10px;
   border-radius: 3px;
+  white-space: nowrap;
 }
 .wod-time {
   font-family: 'Bebas Neue', sans-serif;
-  font-size: 32px;
+  font-size: 28px;
   letter-spacing: 2px;
   line-height: 1;
+  white-space: nowrap;
+}
+.wod-subtitle {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.3px;
+  line-height: 1.4;
 }
 .wod-targets {
   display: flex;
@@ -412,4 +446,5 @@ body {
   .section-title { font-size: 24px; }
   .ex-name, .ex-reps { font-size: 19px; }
   .stat-val { font-size: 18px; }
+  .wod-time { font-size: 24px; }
 }
