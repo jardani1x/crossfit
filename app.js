@@ -1,7 +1,7 @@
 /* ============ STATE ============ */
 let DATA = null;
 
-/* ============ WOD GENERATION ============ */
+/* ============ SESSION GENERATION ============ */
 function todayKey() {
   const d = new Date();
   const y = d.getFullYear();
@@ -20,31 +20,45 @@ function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-function generateWOD() {
-  const wod = [];
-  for (const cat of DATA.categoryOrder) {
-    const ex = pick(DATA.library[cat]);
-    wod.push({ category: cat, ...ex });
-  }
-  return wod;
+// Pick n unique items from arr without replacement
+function pickN(arr, n) {
+  const shuffled = [...arr].sort(() => Math.random() - 0.5);
+  return shuffled.slice(0, n);
 }
 
-function loadOrCreateWOD() {
+function generateSession() {
+  const wod = DATA.categoryOrder.map(cat => ({
+    category: cat,
+    ...pick(DATA.library[cat])
+  }));
+  const strength = pick(DATA.strengthPool);
+  const accessory = pickN(DATA.accessoryPool, 3);
+  return { wod, strength, accessory };
+}
+
+function loadOrCreateSession() {
   const key = todayKey();
   const existing = localStorage.getItem(key);
   if (existing) {
-    try { return JSON.parse(existing); } catch (e) { /* fall through */ }
+    try {
+      const parsed = JSON.parse(existing);
+      // Support old format (plain array) — regenerate if missing strength/accessory
+      if (Array.isArray(parsed)) throw new Error("legacy");
+      return parsed;
+    } catch (e) { /* fall through to generate fresh */ }
   }
-  const fresh = generateWOD();
+  const fresh = generateSession();
   localStorage.setItem(key, JSON.stringify(fresh));
   return fresh;
 }
 
-function regenerateWOD() {
+function regenerateSession() {
   const key = todayKey();
-  const fresh = generateWOD();
+  const fresh = generateSession();
   localStorage.setItem(key, JSON.stringify(fresh));
-  renderWOD(fresh);
+  renderWOD(fresh.wod);
+  renderStrength(fresh.strength);
+  renderAccessory(fresh.accessory);
 }
 
 /* ============ RENDERING ============ */
@@ -54,48 +68,36 @@ function escapeHTML(s) {
   }[c]));
 }
 
+function fadeIn(el) {
+  el.style.opacity = "0";
+  el.style.transform = "translateY(6px)";
+  requestAnimationFrame(() => {
+    el.style.transition = "opacity 0.4s ease, transform 0.4s ease";
+    el.style.opacity = "1";
+    el.style.transform = "translateY(0)";
+  });
+}
+
 function renderWOD(wod) {
   const list = document.getElementById("wodList");
   list.innerHTML = wod.map(ex => `
     <div class="exercise">
       <div class="ex-top">
-        <div>
-          <span class="badge ${ex.category}">${ex.category.toUpperCase()}</span>
-        </div>
+        <div><span class="badge ${ex.category}">${ex.category.toUpperCase()}</span></div>
         <div class="ex-reps">${escapeHTML(ex.reps)}</div>
       </div>
       <div class="ex-name">${escapeHTML(ex.name)}</div>
       <div class="ex-cue">${escapeHTML(ex.cue)}</div>
     </div>
   `).join("");
-
-  // subtle fade-in on (re)generate
-  list.style.opacity = "0";
-  list.style.transform = "translateY(6px)";
-  requestAnimationFrame(() => {
-    list.style.transition = "opacity 0.4s ease, transform 0.4s ease";
-    list.style.opacity = "1";
-    list.style.transform = "translateY(0)";
-  });
+  fadeIn(list);
 }
 
-function renderWarmup() {
-  const el = document.getElementById("warmupList");
-  el.innerHTML = `
-    <div class="section-badge"><span class="badge warmup">PREP</span></div>
-  ` + DATA.warmup.map(e => `
-    <div class="simple-row">
-      <div class="simple-name">${escapeHTML(e.name)}</div>
-      <div class="simple-val">${escapeHTML(e.val)}</div>
-    </div>
-  `).join("");
-}
-
-function renderStrength() {
+function renderStrength(exercises) {
   const el = document.getElementById("strengthList");
   el.innerHTML = `
     <div class="section-badge"><span class="badge strength">STRENGTH</span></div>
-  ` + DATA.strength.map(e => `
+  ` + exercises.map(e => `
     <div class="exercise">
       <div class="ex-top">
         <div class="ex-name">${escapeHTML(e.name)}</div>
@@ -104,13 +106,27 @@ function renderStrength() {
       <div class="ex-cue">${escapeHTML(e.cue)}</div>
     </div>
   `).join("");
+  fadeIn(el);
 }
 
-function renderAccessory() {
+function renderAccessory(exercises) {
   const el = document.getElementById("accessoryList");
   el.innerHTML = `
     <div class="section-badge"><span class="badge accessory">ACCESSORY</span></div>
-  ` + DATA.accessory.map(e => `
+  ` + exercises.map(e => `
+    <div class="simple-row">
+      <div class="simple-name">${escapeHTML(e.name)}</div>
+      <div class="simple-val">${escapeHTML(e.val)}</div>
+    </div>
+  `).join("");
+  fadeIn(el);
+}
+
+function renderWarmup() {
+  const el = document.getElementById("warmupList");
+  el.innerHTML = `
+    <div class="section-badge"><span class="badge warmup">PREP</span></div>
+  ` + DATA.warmup.map(e => `
     <div class="simple-row">
       <div class="simple-name">${escapeHTML(e.name)}</div>
       <div class="simple-val">${escapeHTML(e.val)}</div>
@@ -131,8 +147,7 @@ function renderCooldown() {
 }
 
 function showError(message) {
-  const ids = ["warmupList", "strengthList", "wodList", "accessoryList", "cooldownList"];
-  ids.forEach(id => {
+  ["warmupList", "strengthList", "wodList", "accessoryList", "cooldownList"].forEach(id => {
     const el = document.getElementById(id);
     if (el) el.innerHTML = `<div class="error">${escapeHTML(message)}</div>`;
   });
@@ -152,13 +167,14 @@ async function init() {
     return;
   }
 
+  const session = loadOrCreateSession();
   renderWarmup();
-  renderStrength();
-  renderWOD(loadOrCreateWOD());
-  renderAccessory();
+  renderStrength(session.strength);
+  renderWOD(session.wod);
+  renderAccessory(session.accessory);
   renderCooldown();
 
-  document.getElementById("rerollBtn").addEventListener("click", regenerateWOD);
+  document.getElementById("rerollBtn").addEventListener("click", regenerateSession);
 }
 
 document.addEventListener("DOMContentLoaded", init);

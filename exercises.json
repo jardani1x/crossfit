@@ -51,6 +51,48 @@
       { "name": "DB Mixed Carry",      "reps": "20m/side", "cue": "One overhead, one at side, switch." }
     ]
   },
+  "strengthPool": [
+    [
+      { "name": "DB Hang Power Clean", "reps": "5 × 5", "cue": "Build load each set, explosive hip drive." },
+      { "name": "Strict Pull-Up",      "reps": "5 × 3", "cue": "No kip. Full hang, chin clears the bar." }
+    ],
+    [
+      { "name": "DB Push Press",       "reps": "5 × 5", "cue": "Aggressive leg drive, lockout overhead." },
+      { "name": "DB Romanian Deadlift","reps": "5 × 6", "cue": "Slow lower, feel the stretch, drive hips." }
+    ],
+    [
+      { "name": "DB Floor Press",      "reps": "5 × 5", "cue": "Pause on floor, control the descent." },
+      { "name": "DB Bent-Over Row",    "reps": "5 × 8", "cue": "Flat back, pull to hip, squeeze shoulder." }
+    ],
+    [
+      { "name": "DB Front Squat",      "reps": "5 × 5", "cue": "Elbows up, stay tall, drive through heels." },
+      { "name": "Single-Arm DB Row",   "reps": "5 × 6", "cue": "Brace hard, elbow drives to ceiling." }
+    ],
+    [
+      { "name": "DB Deadlift",         "reps": "5 × 5", "cue": "Neutral spine, push floor away, lockout." },
+      { "name": "Pike Push-Up",        "reps": "5 × 8", "cue": "Hips high, crown to floor, press up tall." }
+    ],
+    [
+      { "name": "Bulgarian Split Squat","reps": "5 × 6", "cue": "Rear foot elevated, front knee tracks toe." },
+      { "name": "Chin-Up",             "reps": "5 × 4", "cue": "Supinated grip, full hang, biceps squeeze." }
+    ],
+    [
+      { "name": "DB Hang Power Clean", "reps": "5 × 3", "cue": "Heavier today — speed through the pull." },
+      { "name": "Strict Pull-Up",      "reps": "5 × 5", "cue": "Slow 3-count negative each rep." }
+    ]
+  ],
+  "accessoryPool": [
+    { "name": "Banded Face Pull",       "val": "3 × 15" },
+    { "name": "Single-Arm DB Row",      "val": "3 × 12" },
+    { "name": "Hanging Knee Raises",    "val": "3 × 12" },
+    { "name": "Banded Pull-Apart",      "val": "3 × 20" },
+    { "name": "Banded Good Morning",    "val": "3 × 15" },
+    { "name": "Hollow Body Hold",       "val": "3 × 30 sec" },
+    { "name": "DB Hammer Curl",         "val": "3 × 12" },
+    { "name": "DB Tricep Kickback",     "val": "3 × 12" },
+    { "name": "Dead Hang",              "val": "3 × 30 sec" },
+    { "name": "Banded Glute Bridge",    "val": "3 × 20" }
+  ],
   "warmup": [
     { "name": "Jumping Jacks",            "val": "60 sec" },
     { "name": "Arm Circles (fwd + bwd)",  "val": "30 sec" },
@@ -58,15 +100,6 @@
     { "name": "Bodyweight Squat",         "val": "15 reps" },
     { "name": "Inchworm → Push-Up",       "val": "8 reps" },
     { "name": "Banded Pass-Through",      "val": "10 reps" }
-  ],
-  "strength": [
-    { "name": "DB Hang Power Clean", "reps": "5 × 5", "cue": "Build load, focus on explosive hip drive." },
-    { "name": "Strict Pull-Up",      "reps": "5 × 3", "cue": "No kip. Full hang to chin over bar." }
-  ],
-  "accessory": [
-    { "name": "Banded Face Pull",    "val": "3 × 15" },
-    { "name": "Single-Arm DB Row",   "val": "3 × 12" },
-    { "name": "Hanging Knee Raises", "val": "3 × 12" }
   ],
   "cooldown": [
     { "name": "Child's Pose",          "val": "60 sec" },
