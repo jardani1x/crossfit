@@ -231,6 +231,19 @@ body {
   color: var(--red);
 }
 
+.ex-equipment {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--orange);
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  line-height: 1.4;
+}
+.ex-equipment::before {
+  content: "◆ ";
+  opacity: 0.85;
+}
+
 .badge {
   display: inline-block;
   font-family: 'DM Mono', monospace;
@@ -348,23 +361,31 @@ body {
 .simple-row {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: flex-start;
   gap: 12px;
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
 }
 .simple-row:last-child { border-bottom: none; }
+.simple-left {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  min-width: 0;
+}
 .simple-name {
   font-family: 'DM Sans', sans-serif;
   font-size: 14px;
   color: var(--text);
   font-weight: 500;
+  line-height: 1.2;
 }
 .simple-val {
   font-family: 'DM Mono', monospace;
   font-size: 12px;
   color: var(--orange);
   white-space: nowrap;
+  padding-top: 2px;
 }
 
 /* STRENGTH */

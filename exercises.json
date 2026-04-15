@@ -2,110 +2,110 @@
   "categoryOrder": ["push", "pull", "squat", "hinge", "lunge", "carry"],
   "library": {
     "push": [
-      { "name": "Push-Up",                "reps": "12 reps", "cue": "Elbows 45°, rigid plank, full lockout." },
-      { "name": "DB Push Press",          "reps": "10 reps", "cue": "Dip-drive with legs, punch DBs overhead." },
-      { "name": "DB Floor Press",         "reps": "12 reps", "cue": "Pause chest, press to full extension." },
-      { "name": "Pike Push-Up",           "reps": "10 reps", "cue": "Hips high, lower crown to floor." },
-      { "name": "Wall Handstand Push-Up", "reps": "6 reps",  "cue": "Tight core, nose to floor, press up." },
-      { "name": "Banded Push-Up",         "reps": "10 reps", "cue": "Band across back, explosive lockout." }
+      { "name": "Push-Up",                "reps": "12 reps", "equipment": "Bodyweight",        "cue": "Elbows 45°, rigid plank, full lockout." },
+      { "name": "DB Push Press",          "reps": "10 reps", "equipment": "2× 10kg DB",         "cue": "Dip-drive with legs, punch DBs overhead." },
+      { "name": "DB Floor Press",         "reps": "12 reps", "equipment": "2× 10kg DB",         "cue": "Pause chest, press to full extension." },
+      { "name": "Pike Push-Up",           "reps": "10 reps", "equipment": "Bodyweight",         "cue": "Hips high, lower crown to floor." },
+      { "name": "Wall Handstand Push-Up", "reps": "6 reps",  "equipment": "Bodyweight + Wall",  "cue": "Tight core, nose to floor, press up." },
+      { "name": "Banded Push-Up",         "reps": "10 reps", "equipment": "Heavy band",         "cue": "Band across back, explosive lockout." }
     ],
     "pull": [
-      { "name": "Pull-Up",            "reps": "8 reps",  "cue": "Full hang, chin over bar, control down." },
-      { "name": "Chin-Up",            "reps": "8 reps",  "cue": "Supinated grip, squeeze biceps at top." },
-      { "name": "Banded Pull-Apart",  "reps": "20 reps", "cue": "Arms straight, pinch shoulder blades." },
-      { "name": "DB Bent-Over Row",   "reps": "12 reps", "cue": "Flat back, pull to hip, elbows tight." },
-      { "name": "Single-Arm DB Row",  "reps": "10/side", "cue": "Hinge braced, drive elbow to ceiling." },
-      { "name": "Banded Face Pull",   "reps": "15 reps", "cue": "Pull to forehead, external rotation." },
-      { "name": "Inverted Row (bar)", "reps": "12 reps", "cue": "Body straight, chest to bar, control." }
+      { "name": "Pull-Up",            "reps": "8 reps",  "equipment": "Pull-up bar", "cue": "Full hang, chin over bar, control down." },
+      { "name": "Chin-Up",            "reps": "8 reps",  "equipment": "Pull-up bar", "cue": "Supinated grip, squeeze biceps at top." },
+      { "name": "Banded Pull-Apart",  "reps": "20 reps", "equipment": "Light band",  "cue": "Arms straight, pinch shoulder blades." },
+      { "name": "DB Bent-Over Row",   "reps": "12 reps", "equipment": "2× 10kg DB",  "cue": "Flat back, pull to hip, elbows tight." },
+      { "name": "Single-Arm DB Row",  "reps": "10/side", "equipment": "1× 10kg DB",  "cue": "Hinge braced, drive elbow to ceiling." },
+      { "name": "Banded Face Pull",   "reps": "15 reps", "equipment": "Light band",  "cue": "Pull to forehead, external rotation." },
+      { "name": "Inverted Row (bar)", "reps": "12 reps", "equipment": "Pull-up bar", "cue": "Body straight, chest to bar, control." }
     ],
     "squat": [
-      { "name": "Air Squat",        "reps": "20 reps", "cue": "Knees track toes, hip below knee." },
-      { "name": "DB Goblet Squat",  "reps": "15 reps", "cue": "DB at chest, elbows inside knees." },
-      { "name": "DB Front Squat",   "reps": "12 reps", "cue": "DBs on shoulders, tall torso, drive up." },
-      { "name": "Jump Squat",       "reps": "12 reps", "cue": "Explode up, soft land, reset each rep." },
-      { "name": "Sumo Squat",       "reps": "15 reps", "cue": "Wide stance, toes out, knees push out." },
-      { "name": "Banded Squat",     "reps": "15 reps", "cue": "Band above knees, press knees outward." }
+      { "name": "Air Squat",        "reps": "20 reps", "equipment": "Bodyweight", "cue": "Knees track toes, hip below knee." },
+      { "name": "DB Goblet Squat",  "reps": "15 reps", "equipment": "1× 10kg DB", "cue": "DB at chest, elbows inside knees." },
+      { "name": "DB Front Squat",   "reps": "12 reps", "equipment": "2× 10kg DB", "cue": "DBs on shoulders, tall torso, drive up." },
+      { "name": "Jump Squat",       "reps": "12 reps", "equipment": "Bodyweight", "cue": "Explode up, soft land, reset each rep." },
+      { "name": "Sumo Squat",       "reps": "15 reps", "equipment": "Bodyweight", "cue": "Wide stance, toes out, knees push out." },
+      { "name": "Banded Squat",     "reps": "15 reps", "equipment": "Heavy band", "cue": "Band above knees, press knees outward." }
     ],
     "hinge": [
-      { "name": "DB Romanian Deadlift", "reps": "12 reps", "cue": "Soft knees, push hips back, flat spine." },
-      { "name": "DB Deadlift",          "reps": "15 reps", "cue": "Neutral spine, drive floor away, lockout." },
-      { "name": "DB Hang Power Clean",  "reps": "10 reps", "cue": "Explosive hips, fast elbows under." },
-      { "name": "Good Morning",         "reps": "12 reps", "cue": "Hinge at hips, flat back, squeeze glutes." },
-      { "name": "Banded Good Morning",  "reps": "15 reps", "cue": "Band on traps, hinge, stand tall, brace." },
-      { "name": "Single-Leg DB RDL",    "reps": "10/side", "cue": "Level hips, reach long, balance controlled." }
+      { "name": "DB Romanian Deadlift", "reps": "12 reps", "equipment": "2× 10kg DB", "cue": "Soft knees, push hips back, flat spine." },
+      { "name": "DB Deadlift",          "reps": "15 reps", "equipment": "2× 10kg DB", "cue": "Neutral spine, drive floor away, lockout." },
+      { "name": "DB Hang Power Clean",  "reps": "10 reps", "equipment": "2× 10kg DB", "cue": "Explosive hips, fast elbows under." },
+      { "name": "Good Morning",         "reps": "12 reps", "equipment": "Bodyweight", "cue": "Hinge at hips, flat back, squeeze glutes." },
+      { "name": "Banded Good Morning",  "reps": "15 reps", "equipment": "Heavy band", "cue": "Band on traps, hinge, stand tall, brace." },
+      { "name": "Single-Leg DB RDL",    "reps": "10/side", "equipment": "1× 10kg DB", "cue": "Level hips, reach long, balance controlled." }
     ],
     "lunge": [
-      { "name": "Reverse Lunge",         "reps": "12/side", "cue": "Step back, knee kisses floor, drive up." },
-      { "name": "Walking Lunge",         "reps": "20 steps","cue": "Long stride, torso tall, knee over ankle." },
-      { "name": "DB Lunge",              "reps": "10/side", "cue": "DBs at sides, drop back knee under hip." },
-      { "name": "Lateral Lunge",         "reps": "10/side", "cue": "Sit into one hip, other leg straight." },
-      { "name": "Bulgarian Split Squat", "reps": "8/side",  "cue": "Rear foot elevated, front knee tracks." },
-      { "name": "DB Step-Up",            "reps": "10/side", "cue": "Full foot on box, drive through heel." }
+      { "name": "Reverse Lunge",         "reps": "12/side", "equipment": "Bodyweight",           "cue": "Step back, knee kisses floor, drive up." },
+      { "name": "Walking Lunge",         "reps": "20 steps","equipment": "Bodyweight",           "cue": "Long stride, torso tall, knee over ankle." },
+      { "name": "DB Lunge",              "reps": "10/side", "equipment": "2× 10kg DB",           "cue": "DBs at sides, drop back knee under hip." },
+      { "name": "Lateral Lunge",         "reps": "10/side", "equipment": "Bodyweight",           "cue": "Sit into one hip, other leg straight." },
+      { "name": "Bulgarian Split Squat", "reps": "8/side",  "equipment": "Bodyweight + Bench",   "cue": "Rear foot elevated, front knee tracks." },
+      { "name": "DB Step-Up",            "reps": "10/side", "equipment": "2× 10kg DB + Step",    "cue": "Full foot on box, drive through heel." }
     ],
     "carry": [
-      { "name": "DB Farmer Carry",     "reps": "40m",      "cue": "Shoulders packed, ribs down, quick steps." },
-      { "name": "Single-Arm DB Carry", "reps": "20m/side", "cue": "Anti-lateral flexion, stay vertical." },
-      { "name": "DB Overhead Carry",   "reps": "20m",      "cue": "Lock elbows, bicep by ears, core tight." },
-      { "name": "DB Suitcase Carry",   "reps": "20m/side", "cue": "One DB, resist the tilt, even steps." },
-      { "name": "DB Front-Rack Carry", "reps": "30m",      "cue": "DBs on shoulders, elbows up, brace hard." },
-      { "name": "DB Mixed Carry",      "reps": "20m/side", "cue": "One overhead, one at side, switch." }
+      { "name": "DB Farmer Carry",     "reps": "40m",      "equipment": "2× 10kg DB",            "cue": "Shoulders packed, ribs down, quick steps." },
+      { "name": "Single-Arm DB Carry", "reps": "20m/side", "equipment": "1× 10kg DB",            "cue": "Anti-lateral flexion, stay vertical." },
+      { "name": "DB Overhead Carry",   "reps": "20m",      "equipment": "2× 5kg DB",             "cue": "Lock elbows, bicep by ears, core tight." },
+      { "name": "DB Suitcase Carry",   "reps": "20m/side", "equipment": "1× 10kg DB",            "cue": "One DB, resist the tilt, even steps." },
+      { "name": "DB Front-Rack Carry", "reps": "30m",      "equipment": "2× 10kg DB",            "cue": "DBs on shoulders, elbows up, brace hard." },
+      { "name": "DB Mixed Carry",      "reps": "20m/side", "equipment": "1× 10kg + 1× 5kg DB",   "cue": "One overhead, one at side, switch." }
     ]
   },
   "strengthPool": [
     [
-      { "name": "DB Hang Power Clean", "reps": "5 × 5", "cue": "Build load each set, explosive hip drive." },
-      { "name": "Strict Pull-Up",      "reps": "5 × 3", "cue": "No kip. Full hang, chin clears the bar." }
+      { "name": "DB Hang Power Clean", "reps": "5 × 5", "equipment": "2× 10kg DB",  "cue": "Build load each set, explosive hip drive." },
+      { "name": "Strict Pull-Up",      "reps": "5 × 3", "equipment": "Pull-up bar", "cue": "No kip. Full hang, chin clears the bar." }
     ],
     [
-      { "name": "DB Push Press",       "reps": "5 × 5", "cue": "Aggressive leg drive, lockout overhead." },
-      { "name": "DB Romanian Deadlift","reps": "5 × 6", "cue": "Slow lower, feel the stretch, drive hips." }
+      { "name": "DB Push Press",       "reps": "5 × 5", "equipment": "2× 10kg DB", "cue": "Aggressive leg drive, lockout overhead." },
+      { "name": "DB Romanian Deadlift","reps": "5 × 6", "equipment": "2× 10kg DB", "cue": "Slow lower, feel the stretch, drive hips." }
     ],
     [
-      { "name": "DB Floor Press",      "reps": "5 × 5", "cue": "Pause on floor, control the descent." },
-      { "name": "DB Bent-Over Row",    "reps": "5 × 8", "cue": "Flat back, pull to hip, squeeze shoulder." }
+      { "name": "DB Floor Press",      "reps": "5 × 5", "equipment": "2× 10kg DB", "cue": "Pause on floor, control the descent." },
+      { "name": "DB Bent-Over Row",    "reps": "5 × 8", "equipment": "2× 10kg DB", "cue": "Flat back, pull to hip, squeeze shoulder." }
     ],
     [
-      { "name": "DB Front Squat",      "reps": "5 × 5", "cue": "Elbows up, stay tall, drive through heels." },
-      { "name": "Single-Arm DB Row",   "reps": "5 × 6", "cue": "Brace hard, elbow drives to ceiling." }
+      { "name": "DB Front Squat",      "reps": "5 × 5", "equipment": "2× 10kg DB", "cue": "Elbows up, stay tall, drive through heels." },
+      { "name": "Single-Arm DB Row",   "reps": "5 × 6", "equipment": "1× 10kg DB", "cue": "Brace hard, elbow drives to ceiling." }
     ],
     [
-      { "name": "DB Deadlift",         "reps": "5 × 5", "cue": "Neutral spine, push floor away, lockout." },
-      { "name": "Pike Push-Up",        "reps": "5 × 8", "cue": "Hips high, crown to floor, press up tall." }
+      { "name": "DB Deadlift",         "reps": "5 × 5", "equipment": "2× 10kg DB", "cue": "Neutral spine, push floor away, lockout." },
+      { "name": "Pike Push-Up",        "reps": "5 × 8", "equipment": "Bodyweight", "cue": "Hips high, crown to floor, press up tall." }
     ],
     [
-      { "name": "Bulgarian Split Squat","reps": "5 × 6", "cue": "Rear foot elevated, front knee tracks toe." },
-      { "name": "Chin-Up",             "reps": "5 × 4", "cue": "Supinated grip, full hang, biceps squeeze." }
+      { "name": "Bulgarian Split Squat","reps": "5 × 6", "equipment": "Bodyweight + Bench", "cue": "Rear foot elevated, front knee tracks toe." },
+      { "name": "Chin-Up",              "reps": "5 × 4", "equipment": "Pull-up bar",        "cue": "Supinated grip, full hang, biceps squeeze." }
     ],
     [
-      { "name": "DB Hang Power Clean", "reps": "5 × 3", "cue": "Heavier today — speed through the pull." },
-      { "name": "Strict Pull-Up",      "reps": "5 × 5", "cue": "Slow 3-count negative each rep." }
+      { "name": "DB Hang Power Clean", "reps": "5 × 3", "equipment": "2× 10kg DB",  "cue": "Heavier today — speed through the pull." },
+      { "name": "Strict Pull-Up",      "reps": "5 × 5", "equipment": "Pull-up bar", "cue": "Slow 3-count negative each rep." }
     ]
   ],
   "accessoryPool": [
-    { "name": "Banded Face Pull",       "val": "3 × 15" },
-    { "name": "Single-Arm DB Row",      "val": "3 × 12" },
-    { "name": "Hanging Knee Raises",    "val": "3 × 12" },
-    { "name": "Banded Pull-Apart",      "val": "3 × 20" },
-    { "name": "Banded Good Morning",    "val": "3 × 15" },
-    { "name": "Hollow Body Hold",       "val": "3 × 30 sec" },
-    { "name": "DB Hammer Curl",         "val": "3 × 12" },
-    { "name": "DB Tricep Kickback",     "val": "3 × 12" },
-    { "name": "Dead Hang",              "val": "3 × 30 sec" },
-    { "name": "Banded Glute Bridge",    "val": "3 × 20" }
+    { "name": "Banded Face Pull",    "val": "3 × 15",     "equipment": "Light band" },
+    { "name": "Single-Arm DB Row",   "val": "3 × 12",     "equipment": "1× 10kg DB" },
+    { "name": "Hanging Knee Raises", "val": "3 × 12",     "equipment": "Pull-up bar" },
+    { "name": "Banded Pull-Apart",   "val": "3 × 20",     "equipment": "Light band" },
+    { "name": "Banded Good Morning", "val": "3 × 15",     "equipment": "Heavy band" },
+    { "name": "Hollow Body Hold",    "val": "3 × 30 sec", "equipment": "Bodyweight" },
+    { "name": "DB Hammer Curl",      "val": "3 × 12",     "equipment": "2× 5kg DB" },
+    { "name": "DB Tricep Kickback",  "val": "3 × 12",     "equipment": "2× 5kg DB" },
+    { "name": "Dead Hang",           "val": "3 × 30 sec", "equipment": "Pull-up bar" },
+    { "name": "Banded Glute Bridge", "val": "3 × 20",     "equipment": "Heavy band" }
   ],
   "warmup": [
-    { "name": "Jumping Jacks",            "val": "60 sec" },
-    { "name": "Arm Circles (fwd + bwd)",  "val": "30 sec" },
-    { "name": "World's Greatest Stretch", "val": "5/side" },
-    { "name": "Bodyweight Squat",         "val": "15 reps" },
-    { "name": "Inchworm → Push-Up",       "val": "8 reps" },
-    { "name": "Banded Pass-Through",      "val": "10 reps" }
+    { "name": "Jumping Jacks",            "val": "60 sec", "equipment": "Bodyweight" },
+    { "name": "Arm Circles (fwd + bwd)",  "val": "30 sec", "equipment": "Bodyweight" },
+    { "name": "World's Greatest Stretch", "val": "5/side", "equipment": "Bodyweight" },
+    { "name": "Bodyweight Squat",         "val": "15 reps","equipment": "Bodyweight" },
+    { "name": "Inchworm → Push-Up",       "val": "8 reps", "equipment": "Bodyweight" },
+    { "name": "Banded Pass-Through",      "val": "10 reps","equipment": "Light band" }
   ],
   "cooldown": [
-    { "name": "Child's Pose",          "val": "60 sec" },
-    { "name": "Pigeon Stretch",        "val": "45/side" },
-    { "name": "Couch Stretch",         "val": "45/side" },
-    { "name": "Thoracic Spine Twist",  "val": "30/side" },
-    { "name": "Standing Forward Fold", "val": "60 sec" }
+    { "name": "Child's Pose",          "val": "60 sec",   "equipment": "Bodyweight" },
+    { "name": "Pigeon Stretch",        "val": "45/side",  "equipment": "Bodyweight" },
+    { "name": "Couch Stretch",         "val": "45/side",  "equipment": "Bodyweight + Wall" },
+    { "name": "Thoracic Spine Twist",  "val": "30/side",  "equipment": "Bodyweight" },
+    { "name": "Standing Forward Fold", "val": "60 sec",   "equipment": "Bodyweight" }
   ]
 }

@@ -278,12 +278,25 @@ function renderWOD(wod) {
         <div class="ex-reps">${escapeHTML(ex.reps)}</div>
       </div>
       <div class="ex-name">${escapeHTML(ex.name)}</div>
+      ${ex.equipment ? `<div class="ex-equipment">${escapeHTML(ex.equipment)}</div>` : ""}
       <div class="ex-cue">${escapeHTML(ex.cue)}</div>
     </div>
   `).join("");
 
   fadeIn(header);
   fadeIn(list);
+}
+
+function simpleRowHTML(e) {
+  return `
+    <div class="simple-row">
+      <div class="simple-left">
+        <div class="simple-name">${escapeHTML(e.name)}</div>
+        ${e.equipment ? `<div class="ex-equipment">${escapeHTML(e.equipment)}</div>` : ""}
+      </div>
+      <div class="simple-val">${escapeHTML(e.val)}</div>
+    </div>
+  `;
 }
 
 function renderStrength(exercises) {
@@ -296,6 +309,7 @@ function renderStrength(exercises) {
         <div class="ex-name">${escapeHTML(e.name)}</div>
         <div class="ex-reps">${escapeHTML(e.reps)}</div>
       </div>
+      ${e.equipment ? `<div class="ex-equipment">${escapeHTML(e.equipment)}</div>` : ""}
       <div class="ex-cue">${escapeHTML(e.cue)}</div>
     </div>
   `).join("");
@@ -306,12 +320,7 @@ function renderAccessory(exercises) {
   const el = document.getElementById("accessoryList");
   el.innerHTML = `
     <div class="section-badge"><span class="badge accessory">ACCESSORY</span></div>
-  ` + exercises.map(e => `
-    <div class="simple-row">
-      <div class="simple-name">${escapeHTML(e.name)}</div>
-      <div class="simple-val">${escapeHTML(e.val)}</div>
-    </div>
-  `).join("");
+  ` + exercises.map(simpleRowHTML).join("");
   fadeIn(el);
 }
 
@@ -319,24 +328,14 @@ function renderWarmup() {
   const el = document.getElementById("warmupList");
   el.innerHTML = `
     <div class="section-badge"><span class="badge warmup">PREP</span></div>
-  ` + DATA.warmup.map(e => `
-    <div class="simple-row">
-      <div class="simple-name">${escapeHTML(e.name)}</div>
-      <div class="simple-val">${escapeHTML(e.val)}</div>
-    </div>
-  `).join("");
+  ` + DATA.warmup.map(simpleRowHTML).join("");
 }
 
 function renderCooldown() {
   const el = document.getElementById("cooldownList");
   el.innerHTML = `
     <div class="section-badge"><span class="badge cooldown">MOBILITY</span></div>
-  ` + DATA.cooldown.map(e => `
-    <div class="simple-row">
-      <div class="simple-name">${escapeHTML(e.name)}</div>
-      <div class="simple-val">${escapeHTML(e.val)}</div>
-    </div>
-  `).join("");
+  ` + DATA.cooldown.map(simpleRowHTML).join("");
 }
 
 function updateStats(session) {
