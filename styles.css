@@ -388,12 +388,14 @@ body {
   padding-top: 2px;
 }
 
-/* STRENGTH */
-.strength-card .exercise {
+/* STRENGTH + ACCESSORY detail cards */
+.strength-card .exercise,
+.accessory-card .exercise {
   padding: 10px 0;
   border-bottom: 1px solid var(--border);
 }
-.strength-card .exercise:last-child { border-bottom: none; }
+.strength-card .exercise:last-child,
+.accessory-card .exercise:last-child { border-bottom: none; }
 
 /* STATS BAR */
 .stats-bar {

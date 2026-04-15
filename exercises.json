@@ -82,16 +82,16 @@
     ]
   ],
   "accessoryPool": [
-    { "name": "Banded Face Pull",    "val": "3 × 15",     "equipment": "Light band" },
-    { "name": "Single-Arm DB Row",   "val": "3 × 12",     "equipment": "1× 10kg DB" },
-    { "name": "Hanging Knee Raises", "val": "3 × 12",     "equipment": "Pull-up bar" },
-    { "name": "Banded Pull-Apart",   "val": "3 × 20",     "equipment": "Light band" },
-    { "name": "Banded Good Morning", "val": "3 × 15",     "equipment": "Heavy band" },
-    { "name": "Hollow Body Hold",    "val": "3 × 30 sec", "equipment": "Bodyweight" },
-    { "name": "DB Hammer Curl",      "val": "3 × 12",     "equipment": "2× 5kg DB" },
-    { "name": "DB Tricep Kickback",  "val": "3 × 12",     "equipment": "2× 5kg DB" },
-    { "name": "Dead Hang",           "val": "3 × 30 sec", "equipment": "Pull-up bar" },
-    { "name": "Banded Glute Bridge", "val": "3 × 20",     "equipment": "Heavy band" }
+    { "name": "Banded Face Pull",    "val": "3 × 15",     "equipment": "Light band",  "cue": "Pull to forehead, elbows high, pause at the back." },
+    { "name": "Single-Arm DB Row",   "val": "3 × 12",     "equipment": "1× 10kg DB",  "cue": "Brace the torso, pull elbow tight to hip." },
+    { "name": "Hanging Knee Raises", "val": "3 × 12",     "equipment": "Pull-up bar", "cue": "Dead hang start, knees to chest, no swing." },
+    { "name": "Banded Pull-Apart",   "val": "3 × 20",     "equipment": "Light band",  "cue": "Straight arms, pinch shoulder blades together." },
+    { "name": "Banded Good Morning", "val": "3 × 15",     "equipment": "Heavy band",  "cue": "Soft knees, hinge at hips, flat back throughout." },
+    { "name": "Hollow Body Hold",    "val": "3 × 30 sec", "equipment": "Bodyweight",  "cue": "Low back pressed to floor, legs and shoulders off." },
+    { "name": "DB Hammer Curl",      "val": "3 × 12",     "equipment": "2× 5kg DB",   "cue": "Neutral grip, slow negative, elbows pinned to sides." },
+    { "name": "DB Tricep Kickback",  "val": "3 × 12",     "equipment": "2× 5kg DB",   "cue": "Upper arm locked parallel, extend only at the elbow." },
+    { "name": "Dead Hang",           "val": "3 × 30 sec", "equipment": "Pull-up bar", "cue": "Full hang, shoulders active, breathe steady." },
+    { "name": "Banded Glute Bridge", "val": "3 × 20",     "equipment": "Heavy band",  "cue": "Knees press out against band, squeeze glutes at top." }
   ],
   "warmup": [
     { "name": "Jumping Jacks",            "val": "60 sec", "equipment": "Bodyweight" },

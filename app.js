@@ -320,7 +320,16 @@ function renderAccessory(exercises) {
   const el = document.getElementById("accessoryList");
   el.innerHTML = `
     <div class="section-badge"><span class="badge accessory">ACCESSORY</span></div>
-  ` + exercises.map(simpleRowHTML).join("");
+  ` + exercises.map(e => `
+    <div class="exercise">
+      <div class="ex-top">
+        <div class="ex-name">${escapeHTML(e.name)}</div>
+        <div class="ex-reps">${escapeHTML(e.val)}</div>
+      </div>
+      ${e.equipment ? `<div class="ex-equipment">${escapeHTML(e.equipment)}</div>` : ""}
+      ${e.cue ? `<div class="ex-cue">${escapeHTML(e.cue)}</div>` : ""}
+    </div>
+  `).join("");
   fadeIn(el);
 }
 
