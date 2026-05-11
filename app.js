@@ -232,6 +232,12 @@ function escapeHTML(s) {
   }[c]));
 }
 
+function videoLink(name) {
+  const q = encodeURIComponent(name + " exercise proper form");
+  const url = `https://www.youtube.com/results?search_query=${q}`;
+  return `<a class="ex-video" href="${url}" target="_blank" rel="noopener">▶ Watch form guide</a>`;
+}
+
 function fadeIn(el) {
   el.style.opacity = "0";
   el.style.transform = "translateY(6px)";
@@ -280,6 +286,7 @@ function renderWOD(wod) {
       <div class="ex-name">${escapeHTML(ex.name)}</div>
       ${ex.equipment ? `<div class="ex-equipment">${escapeHTML(ex.equipment)}</div>` : ""}
       <div class="ex-cue">${escapeHTML(ex.cue)}</div>
+      ${videoLink(ex.name)}
     </div>
   `).join("");
 
@@ -311,6 +318,7 @@ function renderStrength(exercises) {
       </div>
       ${e.equipment ? `<div class="ex-equipment">${escapeHTML(e.equipment)}</div>` : ""}
       <div class="ex-cue">${escapeHTML(e.cue)}</div>
+      ${videoLink(e.name)}
     </div>
   `).join("");
   fadeIn(el);
@@ -328,6 +336,7 @@ function renderAccessory(exercises) {
       </div>
       ${e.equipment ? `<div class="ex-equipment">${escapeHTML(e.equipment)}</div>` : ""}
       ${e.cue ? `<div class="ex-cue">${escapeHTML(e.cue)}</div>` : ""}
+      ${videoLink(e.name)}
     </div>
   `).join("");
   fadeIn(el);

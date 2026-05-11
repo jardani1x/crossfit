@@ -244,6 +244,22 @@ body {
   opacity: 0.85;
 }
 
+.ex-video {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: var(--push);
+  text-decoration: none;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 4px 0 0;
+  transition: color 0.2s ease;
+}
+.ex-video:hover {
+  color: var(--text);
+  text-decoration: underline;
+}
+
 .badge {
   display: inline-block;
   font-family: 'DM Mono', monospace;
