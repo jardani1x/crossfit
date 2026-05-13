@@ -55,16 +55,19 @@ function pickRepBased(cats, count) {
   return pickN(pool, Math.min(count, pool.length));
 }
 
-/* ============ WOD FORMAT BUILDERS (all ~20 min) ============ */
+/* ============ WOD FORMAT BUILDERS (20–30 min) ============ */
 function buildAMRAP() {
+  const mins = pick([20, 25]);
+  const begRounds = mins === 20 ? "5+" : "6+";
+  const intRounds = mins === 20 ? "8+" : "10+";
   return {
     format: "amrap",
-    badge: "AMRAP 20",
-    bigDisplay: "20:00",
-    subtitle: "As Many Rounds As Possible in 20 minutes",
+    badge: `AMRAP ${mins}`,
+    bigDisplay: `${mins}:00`,
+    subtitle: `As Many Rounds As Possible in ${mins} minutes`,
     targets: [
-      { label: "BEGINNER",     value: "5+ ROUNDS" },
-      { label: "INTERMEDIATE", value: "8+ ROUNDS", rx: true }
+      { label: "BEGINNER",     value: `${begRounds} ROUNDS` },
+      { label: "INTERMEDIATE", value: `${intRounds} ROUNDS`, rx: true }
     ],
     exercises: pickBaseExercises()
   };
@@ -79,24 +82,25 @@ function buildForTime() {
       format: "fortime",
       badge: "FOR TIME",
       bigDisplay: "21-15-9",
-      subtitle: "Complete the rep scheme for time — 20 min cap",
+      subtitle: "Complete the rep scheme for time — 25 min cap",
       targets: [
-        { label: "BEGINNER",     value: "< 20:00" },
-        { label: "INTERMEDIATE", value: "< 12:00", rx: true }
+        { label: "BEGINNER",     value: "< 25:00" },
+        { label: "INTERMEDIATE", value: "< 15:00", rx: true }
       ],
       exercises: three.map(e => ({ ...e, reps: "21-15-9" }))
     };
   }
 
   const rounds = style === "rft3" ? 3 : 5;
+  const cap = rounds === 3 ? 20 : 25;
   return {
     format: "fortime",
     badge: `${rounds} RFT`,
     bigDisplay: `${rounds} RDS`,
-    subtitle: `${rounds} Rounds For Time — 20 min cap`,
+    subtitle: `${rounds} Rounds For Time — ${cap} min cap`,
     targets: [
-      { label: "BEGINNER",     value: "< 20:00" },
-      { label: "INTERMEDIATE", value: `< ${rounds === 3 ? 14 : 16}:00`, rx: true }
+      { label: "BEGINNER",     value: `< ${cap}:00` },
+      { label: "INTERMEDIATE", value: `< ${rounds === 3 ? 14 : 18}:00`, rx: true }
     ],
     exercises: pickBaseExercises()
   };
@@ -104,6 +108,7 @@ function buildForTime() {
 
 function buildEMOM() {
   const numMoves = pick([4, 5]);
+  const totalMin = pick([20, 24, 30]);
   const cats = pickN(["push", "pull", "squat", "hinge", "lunge"], numMoves);
   const exercises = cats.map((cat, i) => ({
     category: cat,
@@ -112,12 +117,12 @@ function buildEMOM() {
   }));
   return {
     format: "emom",
-    badge: "EMOM 20",
-    bigDisplay: "20:00",
-    subtitle: "Every Minute On the Minute — rotate through",
+    badge: `EMOM ${totalMin}`,
+    bigDisplay: `${totalMin}:00`,
+    subtitle: `Every Minute On the Minute for ${totalMin} min — rotate through`,
     targets: [
       { label: "ROTATION",   value: `${numMoves} MOVES` },
-      { label: "TOTAL MIN",  value: "20", rx: true }
+      { label: "TOTAL MIN",  value: `${totalMin}`, rx: true }
     ],
     exercises
   };
@@ -131,10 +136,10 @@ function buildChipper() {
     format: "chipper",
     badge: "CHIPPER",
     bigDisplay: "FOR TIME",
-    subtitle: "Work through the list once — 20 min cap",
+    subtitle: "Work through the list once — 30 min cap",
     targets: [
-      { label: "BEGINNER",     value: "< 22:00" },
-      { label: "INTERMEDIATE", value: "< 16:00", rx: true }
+      { label: "BEGINNER",     value: "< 30:00" },
+      { label: "INTERMEDIATE", value: "< 20:00", rx: true }
     ],
     exercises: base.map((e, i) => {
       if (e.category === "carry") {
@@ -152,19 +157,20 @@ function buildChipper() {
 function buildLadder() {
   const direction = pick(["down", "up"]);
   const numMoves = pick([2, 3]);
+  const topRung = numMoves === 2 ? 15 : 12;
   const exercises = pickRepBased(["push", "pull", "squat", "hinge"], numMoves);
-  const bigDisplay = direction === "down" ? "12→1" : "1→12";
-  const repsLabel = direction === "down" ? "12→1 reps" : "1→12 reps";
+  const bigDisplay = direction === "down" ? `${topRung}→1` : `1→${topRung}`;
+  const repsLabel = direction === "down" ? `${topRung}→1 reps` : `1→${topRung} reps`;
   return {
     format: "ladder",
     badge: "LADDER",
     bigDisplay,
     subtitle: direction === "down"
-      ? "Descending ladder — 12 down to 1"
-      : "Ascending ladder — 1 up to 12",
+      ? `Descending ladder — ${topRung} down to 1`
+      : `Ascending ladder — 1 up to ${topRung}`,
     targets: [
-      { label: "BEGINNER",     value: "< 20:00" },
-      { label: "INTERMEDIATE", value: "< 14:00", rx: true }
+      { label: "BEGINNER",     value: "< 25:00" },
+      { label: "INTERMEDIATE", value: "< 18:00", rx: true }
     ],
     exercises: exercises.map(e => ({ ...e, reps: repsLabel }))
   };
@@ -300,7 +306,7 @@ function fadeIn(el) {
 
 function renderWOD(wod) {
   const meta = document.getElementById("wodMeta");
-  if (meta) meta.textContent = `${wod.badge} • 20 MIN`;
+  if (meta) meta.textContent = `${wod.badge} • RANDOMIZED`;
 
   const header = document.getElementById("wodHeader");
   header.innerHTML = `
