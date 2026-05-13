@@ -2,13 +2,14 @@
 let DATA = null;
 let selectedFormat = "amrap";
 
-const WOD_FORMATS = ["amrap", "fortime", "emom", "chipper", "ladder", "murph"];
+const WOD_FORMATS = ["amrap", "fortime", "emom", "chipper", "ladder", "metcon", "murph"];
 const FORMAT_LABELS = {
   amrap: "AMRAP",
   fortime: "FOR TIME",
   emom: "EMOM",
   chipper: "CHIPPER",
   ladder: "LADDER",
+  metcon: "METCON",
   murph: "MURPH"
 };
 
@@ -177,6 +178,58 @@ function buildLadder() {
   };
 }
 
+function buildMetCon() {
+  const style = pick(["tabata", "circuit"]);
+
+  if (style === "tabata") {
+    const numMoves = pick([4, 5]);
+    const cats = pickN(["push", "pull", "squat", "hinge", "lunge"], numMoves);
+    const exercises = cats.map((cat, i) => ({
+      category: cat,
+      ...pick(DATA.library[cat]),
+      reps: "MAX REPS",
+      prefix: `MOVE ${i + 1}`
+    }));
+    const totalMin = numMoves * 4;
+    return {
+      format: "metcon",
+      badge: "TABATA",
+      bigDisplay: `${totalMin}:00`,
+      subtitle: `20 sec work / 10 sec rest × 8 rounds per move — ${numMoves} movements`,
+      targets: [
+        { label: "INTERVALS", value: `${numMoves * 8}` },
+        { label: "TOTAL MIN", value: `${totalMin}`, rx: true }
+      ],
+      exercises
+    };
+  }
+
+  const numMoves = pick([5, 6]);
+  const rounds = pick([3, 4]);
+  const work = pick([30, 40]);
+  const rest = work === 40 ? 20 : 15;
+  const cats = pickN(["push", "pull", "squat", "hinge", "lunge", "carry"], numMoves);
+  const exercises = cats.map((cat, i) => ({
+    category: cat,
+    ...pick(DATA.library[cat]),
+    reps: `${work}s WORK`,
+    prefix: `STN ${i + 1}`
+  }));
+  const roundMin = Math.ceil(numMoves * (work + rest) / 60);
+  const totalMin = roundMin * rounds + (rounds - 1);
+  return {
+    format: "metcon",
+    badge: `${rounds} RD CIRCUIT`,
+    bigDisplay: `${work}/${rest}`,
+    subtitle: `${work}s work / ${rest}s rest — ${rounds} rounds — 1 min rest between rounds`,
+    targets: [
+      { label: "STATIONS", value: `${numMoves}` },
+      { label: "EST. TIME", value: `~${totalMin} MIN`, rx: true }
+    ],
+    exercises
+  };
+}
+
 function buildMurph() {
   const variant = pick(["full", "half"]);
   const partition = pick([true, false]);
@@ -236,6 +289,7 @@ function generateWOD(format) {
     case "emom":    return buildEMOM();
     case "chipper": return buildChipper();
     case "ladder":  return buildLadder();
+    case "metcon":  return buildMetCon();
     case "murph":   return buildMurph();
   }
 }
