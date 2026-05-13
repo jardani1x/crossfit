@@ -2,13 +2,14 @@
 let DATA = null;
 let selectedFormat = "amrap";
 
-const WOD_FORMATS = ["amrap", "fortime", "emom", "chipper", "ladder"];
+const WOD_FORMATS = ["amrap", "fortime", "emom", "chipper", "ladder", "murph"];
 const FORMAT_LABELS = {
   amrap: "AMRAP",
   fortime: "FOR TIME",
   emom: "EMOM",
   chipper: "CHIPPER",
-  ladder: "LADDER"
+  ladder: "LADDER",
+  murph: "MURPH"
 };
 
 /* ============ HELPERS ============ */
@@ -55,19 +56,21 @@ function pickRepBased(cats, count) {
   return pickN(pool, Math.min(count, pool.length));
 }
 
-/* ============ WOD FORMAT BUILDERS (20–30 min) ============ */
+/* ============ WOD FORMAT BUILDERS (10–20 min) ============ */
 function buildAMRAP() {
-  const mins = pick([20, 25]);
-  const begRounds = mins === 20 ? "5+" : "6+";
-  const intRounds = mins === 20 ? "8+" : "10+";
+  const mins = pick([10, 12, 15, 20]);
+  const targets = {
+    10: ["3+", "5+"], 12: ["4+", "6+"],
+    15: ["4+", "7+"], 20: ["5+", "8+"]
+  };
   return {
     format: "amrap",
     badge: `AMRAP ${mins}`,
     bigDisplay: `${mins}:00`,
     subtitle: `As Many Rounds As Possible in ${mins} minutes`,
     targets: [
-      { label: "BEGINNER",     value: `${begRounds} ROUNDS` },
-      { label: "INTERMEDIATE", value: `${intRounds} ROUNDS`, rx: true }
+      { label: "BEGINNER",     value: `${targets[mins][0]} ROUNDS` },
+      { label: "INTERMEDIATE", value: `${targets[mins][1]} ROUNDS`, rx: true }
     ],
     exercises: pickBaseExercises()
   };
@@ -82,25 +85,24 @@ function buildForTime() {
       format: "fortime",
       badge: "FOR TIME",
       bigDisplay: "21-15-9",
-      subtitle: "Complete the rep scheme for time — 25 min cap",
+      subtitle: "Complete the rep scheme for time — 20 min cap",
       targets: [
-        { label: "BEGINNER",     value: "< 25:00" },
-        { label: "INTERMEDIATE", value: "< 15:00", rx: true }
+        { label: "BEGINNER",     value: "< 20:00" },
+        { label: "INTERMEDIATE", value: "< 12:00", rx: true }
       ],
       exercises: three.map(e => ({ ...e, reps: "21-15-9" }))
     };
   }
 
   const rounds = style === "rft3" ? 3 : 5;
-  const cap = rounds === 3 ? 20 : 25;
   return {
     format: "fortime",
     badge: `${rounds} RFT`,
     bigDisplay: `${rounds} RDS`,
-    subtitle: `${rounds} Rounds For Time — ${cap} min cap`,
+    subtitle: `${rounds} Rounds For Time — ${rounds === 3 ? 15 : 20} min cap`,
     targets: [
-      { label: "BEGINNER",     value: `< ${cap}:00` },
-      { label: "INTERMEDIATE", value: `< ${rounds === 3 ? 14 : 18}:00`, rx: true }
+      { label: "BEGINNER",     value: `< ${rounds === 3 ? 15 : 20}:00` },
+      { label: "INTERMEDIATE", value: `< ${rounds === 3 ? 10 : 14}:00`, rx: true }
     ],
     exercises: pickBaseExercises()
   };
@@ -108,7 +110,7 @@ function buildForTime() {
 
 function buildEMOM() {
   const numMoves = pick([4, 5]);
-  const totalMin = pick([20, 24, 30]);
+  const totalMin = pick([12, 16, 20]);
   const cats = pickN(["push", "pull", "squat", "hinge", "lunge"], numMoves);
   const exercises = cats.map((cat, i) => ({
     category: cat,
@@ -130,16 +132,16 @@ function buildEMOM() {
 
 function buildChipper() {
   const base = pickBaseExercises();
-  const repSchedule = [50, 40, 40, 30, 30, 20];
-  const carryDistances = [60, 50, 40, 30];
+  const repSchedule = [40, 30, 30, 20, 20, 15];
+  const carryDistances = [50, 40, 30, 20];
   return {
     format: "chipper",
     badge: "CHIPPER",
     bigDisplay: "FOR TIME",
-    subtitle: "Work through the list once — 30 min cap",
+    subtitle: "Work through the list once — 20 min cap",
     targets: [
-      { label: "BEGINNER",     value: "< 30:00" },
-      { label: "INTERMEDIATE", value: "< 20:00", rx: true }
+      { label: "BEGINNER",     value: "< 20:00" },
+      { label: "INTERMEDIATE", value: "< 14:00", rx: true }
     ],
     exercises: base.map((e, i) => {
       if (e.category === "carry") {
@@ -157,22 +159,72 @@ function buildChipper() {
 function buildLadder() {
   const direction = pick(["down", "up"]);
   const numMoves = pick([2, 3]);
-  const topRung = numMoves === 2 ? 15 : 12;
   const exercises = pickRepBased(["push", "pull", "squat", "hinge"], numMoves);
-  const bigDisplay = direction === "down" ? `${topRung}→1` : `1→${topRung}`;
-  const repsLabel = direction === "down" ? `${topRung}→1 reps` : `1→${topRung} reps`;
+  const bigDisplay = direction === "down" ? "10→1" : "1→10";
+  const repsLabel = direction === "down" ? "10→1 reps" : "1→10 reps";
   return {
     format: "ladder",
     badge: "LADDER",
     bigDisplay,
     subtitle: direction === "down"
-      ? `Descending ladder — ${topRung} down to 1`
-      : `Ascending ladder — 1 up to ${topRung}`,
+      ? "Descending ladder — 10 down to 1"
+      : "Ascending ladder — 1 up to 10",
     targets: [
-      { label: "BEGINNER",     value: "< 25:00" },
-      { label: "INTERMEDIATE", value: "< 18:00", rx: true }
+      { label: "BEGINNER",     value: "< 18:00" },
+      { label: "INTERMEDIATE", value: "< 12:00", rx: true }
     ],
     exercises: exercises.map(e => ({ ...e, reps: repsLabel }))
+  };
+}
+
+function buildMurph() {
+  const variant = pick(["full", "half"]);
+  const partition = pick([true, false]);
+  const cardio = pick(["burpees", "highknees"]);
+
+  const mult = variant === "full" ? 1 : 0.5;
+  const pullups = 100 * mult;
+  const pushups = 200 * mult;
+  const squats  = 300 * mult;
+
+  const cardioExercise = cardio === "burpees"
+    ? { name: "Burpees", reps: `${50 * mult} reps`, category: "push",
+        equipment: "Bodyweight", cue: "Chest to floor, jump and clap overhead" }
+    : { name: "High Knees", reps: `${200 * mult} reps`, category: "squat",
+        equipment: "Bodyweight", cue: "Drive knees above hip height, stay on balls of feet" };
+
+  const rounds = variant === "full" ? 20 : 10;
+  const partitionNote = partition
+    ? `Partition the middle: ${rounds} rounds of 5 pull-ups, 10 push-ups, 15 squats`
+    : "Complete each movement in full before moving to the next";
+
+  const exercises = [
+    { ...cardioExercise, prefix: "START" },
+    { name: "Pull-ups", reps: `${pullups} reps`, category: "pull",
+      equipment: "Pull-up bar — use band for assistance if needed",
+      cue: "Full dead hang to chin over bar. Kip or strict." },
+    { name: "Push-ups", reps: `${pushups} reps`, category: "push",
+      equipment: "Bodyweight",
+      cue: "Chest to deck, full lockout at top" },
+    { name: "Air Squats", reps: `${squats} reps`, category: "squat",
+      equipment: "Bodyweight",
+      cue: "Hip crease below knee, stand to full extension" },
+    { ...cardioExercise, prefix: "FINISH" }
+  ];
+
+  const label = variant === "full" ? "FULL MURPH" : "HALF MURPH";
+  const cap = variant === "full" ? 60 : 35;
+
+  return {
+    format: "murph",
+    badge: label,
+    bigDisplay: "FOR TIME",
+    subtitle: `Hero WOD — ${partitionNote} — ${cap} min cap`,
+    targets: [
+      { label: "BEGINNER",     value: `< ${cap}:00` },
+      { label: "INTERMEDIATE", value: `< ${variant === "full" ? 40 : 22}:00`, rx: true }
+    ],
+    exercises
   };
 }
 
@@ -184,6 +236,7 @@ function generateWOD(format) {
     case "emom":    return buildEMOM();
     case "chipper": return buildChipper();
     case "ladder":  return buildLadder();
+    case "murph":   return buildMurph();
   }
 }
 

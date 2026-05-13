@@ -12,6 +12,7 @@
   --hinge: #f47b20;
   --lunge: #a855f7;
   --carry: #14b8a6;
+  --murph: #d4af37;
 }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -509,6 +510,9 @@ body {
 }
 .format-chip:hover { border-color: var(--red); color: var(--text); }
 .format-chip.active { background: var(--red); border-color: var(--red); color: #fff; }
+.format-chip[data-format="murph"] { border-color: var(--murph); color: var(--murph); }
+.format-chip[data-format="murph"]:hover { border-color: var(--murph); color: var(--text); background: rgba(212, 175, 55, 0.1); }
+.format-chip[data-format="murph"].active { background: linear-gradient(180deg, #d4af37 0%, #b8962e 100%); border-color: var(--murph); color: #000; }
 
 @media (max-width: 420px) {
   .logo { font-size: 32px; }
