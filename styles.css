@@ -480,6 +480,36 @@ body {
   letter-spacing: 1px;
 }
 
+/* FORMAT PICKER */
+.format-picker-wrap { margin-bottom: 12px; }
+.format-picker-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  margin-bottom: 6px;
+}
+.format-picker { display: flex; gap: 6px; flex-wrap: wrap; }
+.format-chip {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  padding: 7px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex: 1;
+  text-align: center;
+  min-width: 0;
+}
+.format-chip:hover { border-color: var(--red); color: var(--text); }
+.format-chip.active { background: var(--red); border-color: var(--red); color: #fff; }
+
 @media (max-width: 420px) {
   .logo { font-size: 32px; }
   .section-title { font-size: 24px; }

@@ -1,5 +1,15 @@
 /* ============ STATE ============ */
 let DATA = null;
+let selectedFormat = "amrap";
+
+const WOD_FORMATS = ["amrap", "fortime", "emom", "chipper", "ladder"];
+const FORMAT_LABELS = {
+  amrap: "AMRAP",
+  fortime: "FOR TIME",
+  emom: "EMOM",
+  chipper: "CHIPPER",
+  ladder: "LADDER"
+};
 
 /* ============ HELPERS ============ */
 function todayKey() {
@@ -20,13 +30,11 @@ function pick(arr) {
   return arr[Math.floor(Math.random() * arr.length)];
 }
 
-// Pick n unique items from arr without replacement
 function pickN(arr, n) {
   const shuffled = [...arr].sort(() => Math.random() - 0.5);
   return shuffled.slice(0, n);
 }
 
-// One random exercise per category (all 6 categories)
 function pickBaseExercises() {
   return DATA.categoryOrder.map(cat => ({
     category: cat,
@@ -34,8 +42,6 @@ function pickBaseExercises() {
   }));
 }
 
-// Pick one rep-count-compatible exercise from each given category.
-// Excludes exercises measured in distance, steps, per-side, or seconds.
 function pickRepBased(cats, count) {
   const pool = [];
   for (const cat of cats) {
@@ -49,21 +55,16 @@ function pickRepBased(cats, count) {
   return pickN(pool, Math.min(count, pool.length));
 }
 
-/* ============ WOD FORMAT BUILDERS ============ */
-const WOD_FORMATS = ["amrap", "fortime", "emom", "chipper", "ladder"];
-
+/* ============ WOD FORMAT BUILDERS (all ~20 min) ============ */
 function buildAMRAP() {
-  const duration = pick([10, 12, 15, 20]);
-  const beg = Math.max(2, Math.round(duration / 3.5));
-  const int = Math.max(4, Math.round(duration / 2.2));
   return {
     format: "amrap",
-    badge: `AMRAP ${duration}`,
-    bigDisplay: `${duration}:00`,
-    subtitle: "As Many Rounds As Possible",
+    badge: "AMRAP 20",
+    bigDisplay: "20:00",
+    subtitle: "As Many Rounds As Possible in 20 minutes",
     targets: [
-      { label: "BEGINNER",     value: `${beg}+ ROUNDS` },
-      { label: "INTERMEDIATE", value: `${int}+ ROUNDS`, rx: true }
+      { label: "BEGINNER",     value: "5+ ROUNDS" },
+      { label: "INTERMEDIATE", value: "8+ ROUNDS", rx: true }
     ],
     exercises: pickBaseExercises()
   };
@@ -78,10 +79,10 @@ function buildForTime() {
       format: "fortime",
       badge: "FOR TIME",
       bigDisplay: "21-15-9",
-      subtitle: "Complete the rep scheme for time",
+      subtitle: "Complete the rep scheme for time — 20 min cap",
       targets: [
-        { label: "BEGINNER",     value: "< 14:00" },
-        { label: "INTERMEDIATE", value: "< 8:00", rx: true }
+        { label: "BEGINNER",     value: "< 20:00" },
+        { label: "INTERMEDIATE", value: "< 12:00", rx: true }
       ],
       exercises: three.map(e => ({ ...e, reps: "21-15-9" }))
     };
@@ -92,18 +93,17 @@ function buildForTime() {
     format: "fortime",
     badge: `${rounds} RFT`,
     bigDisplay: `${rounds} RDS`,
-    subtitle: `${rounds} Rounds For Time`,
+    subtitle: `${rounds} Rounds For Time — 20 min cap`,
     targets: [
-      { label: "BEGINNER",     value: `< ${rounds * 4}:00` },
-      { label: "INTERMEDIATE", value: `< ${Math.round(rounds * 2.5)}:00`, rx: true }
+      { label: "BEGINNER",     value: "< 20:00" },
+      { label: "INTERMEDIATE", value: `< ${rounds === 3 ? 14 : 16}:00`, rx: true }
     ],
     exercises: pickBaseExercises()
   };
 }
 
 function buildEMOM() {
-  const duration = pick([10, 12, 14, 16]);
-  const numMoves = pick([3, 4]);
+  const numMoves = pick([4, 5]);
   const cats = pickN(["push", "pull", "squat", "hinge", "lunge"], numMoves);
   const exercises = cats.map((cat, i) => ({
     category: cat,
@@ -112,12 +112,12 @@ function buildEMOM() {
   }));
   return {
     format: "emom",
-    badge: `EMOM ${duration}`,
-    bigDisplay: `${duration}:00`,
+    badge: "EMOM 20",
+    bigDisplay: "20:00",
     subtitle: "Every Minute On the Minute — rotate through",
     targets: [
       { label: "ROTATION",   value: `${numMoves} MOVES` },
-      { label: "TOTAL MIN",  value: `${duration}`, rx: true }
+      { label: "TOTAL MIN",  value: "20", rx: true }
     ],
     exercises
   };
@@ -131,10 +131,10 @@ function buildChipper() {
     format: "chipper",
     badge: "CHIPPER",
     bigDisplay: "FOR TIME",
-    subtitle: "Work through the list once, top to bottom",
+    subtitle: "Work through the list once — 20 min cap",
     targets: [
-      { label: "BEGINNER",     value: "< 20:00" },
-      { label: "INTERMEDIATE", value: "< 14:00", rx: true }
+      { label: "BEGINNER",     value: "< 22:00" },
+      { label: "INTERMEDIATE", value: "< 16:00", rx: true }
     ],
     exercises: base.map((e, i) => {
       if (e.category === "carry") {
@@ -153,25 +153,25 @@ function buildLadder() {
   const direction = pick(["down", "up"]);
   const numMoves = pick([2, 3]);
   const exercises = pickRepBased(["push", "pull", "squat", "hinge"], numMoves);
-  const bigDisplay = direction === "down" ? "10→1" : "1→10";
-  const repsLabel = direction === "down" ? "10→1 reps" : "1→10 reps";
+  const bigDisplay = direction === "down" ? "12→1" : "1→12";
+  const repsLabel = direction === "down" ? "12→1 reps" : "1→12 reps";
   return {
     format: "ladder",
     badge: "LADDER",
     bigDisplay,
     subtitle: direction === "down"
-      ? "Descending ladder — reps drop each round"
-      : "Ascending ladder — reps grow each round",
+      ? "Descending ladder — 12 down to 1"
+      : "Ascending ladder — 1 up to 12",
     targets: [
-      { label: "BEGINNER",     value: "< 15:00" },
-      { label: "INTERMEDIATE", value: "< 9:00", rx: true }
+      { label: "BEGINNER",     value: "< 20:00" },
+      { label: "INTERMEDIATE", value: "< 14:00", rx: true }
     ],
     exercises: exercises.map(e => ({ ...e, reps: repsLabel }))
   };
 }
 
-function generateWOD() {
-  const format = pick(WOD_FORMATS);
+function generateWOD(format) {
+  format = format || selectedFormat;
   switch (format) {
     case "amrap":   return buildAMRAP();
     case "fortime": return buildForTime();
@@ -184,7 +184,7 @@ function generateWOD() {
 /* ============ SESSION ============ */
 function generateSession() {
   return {
-    wod: generateWOD(),
+    wod: generateWOD(selectedFormat),
     strength: pick(DATA.strengthPool),
     accessory: pickN(DATA.accessoryPool, 3)
   };
@@ -225,6 +225,56 @@ function regenerateSession() {
   updateStats(fresh);
 }
 
+/* ============ FORMAT PICKER ============ */
+function renderFormatPicker() {
+  const wrapper = document.createElement("div");
+  wrapper.className = "format-picker-wrap";
+
+  const label = document.createElement("div");
+  label.className = "format-picker-label";
+  label.textContent = "WOD FORMAT";
+  wrapper.appendChild(label);
+
+  const row = document.createElement("div");
+  row.className = "format-picker";
+  row.id = "formatPicker";
+
+  WOD_FORMATS.forEach(fmt => {
+    const chip = document.createElement("button");
+    chip.className = "format-chip" + (fmt === selectedFormat ? " active" : "");
+    chip.dataset.format = fmt;
+    chip.textContent = FORMAT_LABELS[fmt];
+    chip.addEventListener("click", () => selectFormat(fmt));
+    row.appendChild(chip);
+  });
+
+  wrapper.appendChild(row);
+
+  const btn = document.getElementById("rerollBtn");
+  btn.parentNode.insertBefore(wrapper, btn);
+}
+
+function selectFormat(fmt) {
+  selectedFormat = fmt;
+  localStorage.setItem("wod-format", fmt);
+
+  document.querySelectorAll(".format-chip").forEach(c => {
+    c.classList.toggle("active", c.dataset.format === fmt);
+  });
+
+  const key = todayKey();
+  let session;
+  try {
+    session = JSON.parse(localStorage.getItem(key));
+  } catch (e) { return; }
+  if (!session) return;
+
+  session.wod = generateWOD(fmt);
+  localStorage.setItem(key, JSON.stringify(session));
+  renderWOD(session.wod);
+  updateStats(session);
+}
+
 /* ============ RENDERING ============ */
 function escapeHTML(s) {
   return String(s).replace(/[&<>"']/g, c => ({
@@ -250,7 +300,7 @@ function fadeIn(el) {
 
 function renderWOD(wod) {
   const meta = document.getElementById("wodMeta");
-  if (meta) meta.textContent = `${wod.badge} • RANDOMIZED`;
+  if (meta) meta.textContent = `${wod.badge} • 20 MIN`;
 
   const header = document.getElementById("wodHeader");
   header.innerHTML = `
@@ -390,6 +440,11 @@ async function init() {
   }
 
   const session = loadOrCreateSession();
+
+  selectedFormat = session.wod.format || "amrap";
+  localStorage.setItem("wod-format", selectedFormat);
+
+  renderFormatPicker();
   renderWarmup();
   renderStrength(session.strength);
   renderWOD(session.wod);
